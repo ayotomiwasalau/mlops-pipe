@@ -33,6 +33,9 @@ def go(args):
     logger.info("Convert last_review to datetime")
     df['last_review'] = pd.to_datetime(df['last_review'])
 
+    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    df = df[idx].copy()
+
     logger.info("Saving the output artifact")
     df.to_csv("clean_sample.csv", index=False)
 
